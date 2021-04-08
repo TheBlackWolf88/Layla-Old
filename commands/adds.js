@@ -1,5 +1,4 @@
 const mongo = require('../mongo')
-const { execute } = require('../mongoQueries')
 const gshopSchema = require('../schemas/generalshopSchema')
 
 module.exports = {

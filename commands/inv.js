@@ -1,5 +1,5 @@
 const mongo = require('../mongo')
-const inventoryentorySchema = require('../schemas/inventoryentorySchema')
+const inventorySchema = require('../schemas/inventorySchema')
 var inventory = []
 const Discord = require('discord.js')
 
@@ -11,7 +11,7 @@ module.exports = {
         await mongo().then(async(mongoose) => {
             try {
                 //console.log('Fetching...')
-                inventory = await inventoryentorySchema.find({ userid: message.author.id.toString() })
+                inventory = await inventorySchema.find({ userid: message.author.id.toString() })
             } finally {
                 mongoose.connection.close()
             }
