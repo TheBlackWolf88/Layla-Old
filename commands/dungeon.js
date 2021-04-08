@@ -1,4 +1,3 @@
-const { execute } = require("../mongoQueries");
 const mongo = require('../mongo')
 const monSchema = require('../schemas/monstersSchema')
 var monsters = []

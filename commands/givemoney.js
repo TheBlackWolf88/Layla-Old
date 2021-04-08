@@ -1,5 +1,4 @@
 const mongo = require('../mongo')
-const { execute } = require('../mongoQueries')
 const ecoSchema = require('../schemas/economySchema')
 const coinTypes = ['arany', 'ezüst', 'bronz'];
 

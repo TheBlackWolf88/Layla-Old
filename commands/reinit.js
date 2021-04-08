@@ -2,7 +2,6 @@ const mongo = require('../mongo')
 const ecoSchema = require('../schemas/economySchema')
 const statSchema = require('../schemas/statSchema')
 const inventorySchema = require('../schemas/inventorySchema')
-const { execute } = require('../mongoQueries')
 
 module.exports = {
     name: 'reinit',

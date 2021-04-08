@@ -1,5 +1,3 @@
-const { execute } = require("../mongoQueries")
-
 module.exports = {
     name: 'ticket',
     description: 'Opens a ticket',

@@ -1,5 +1,4 @@
 const mongo = require('../mongo')
-const { execute } = require('../mongoQueries')
 const statSchema = require('../schemas/statSchema')
 var allStatArray = [
     'health',
