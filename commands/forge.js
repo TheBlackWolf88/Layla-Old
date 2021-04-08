@@ -3,7 +3,7 @@ const inventorySchema = require('../schemas/inventorySchema')
 const ecoSchema = require("../schemas/economySchema")
 const { execute } = require('./shop')
 var craftlist = []
-const forge = require("../forge.json")
+const forge = require("../JSONS/forge.json")
 var wdamage
 
 function makeItLookGreat(string) {

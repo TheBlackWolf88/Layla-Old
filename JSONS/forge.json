@@ -1,0 +1,15 @@
+[{
+        "question": "ID?"
+    },
+    {
+        "question": "Material of the tool:"
+    }, {
+        "question": "Type of the tool:"
+    },
+    {
+        "question": "Weight of the weapon:"
+    },
+    {
+        "question": "Name of your weapon:"
+    }
+]

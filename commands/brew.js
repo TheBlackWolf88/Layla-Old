@@ -4,7 +4,7 @@ const statSchema = require("../schemas/statSchema")
 const ecoSchema = require("../schemas/economySchema")
 const { execute } = require('./shop')
 var craftlist = []
-const alchemy = require("../alchemy.json")
+const alchemy = require("../JSONS/alchemy.json")
 var inv = []
 var stats = []
 var potion

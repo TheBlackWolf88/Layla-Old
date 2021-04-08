@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-//const {mongoPath} = require('./config.json')
 const mongoPath = 'mongodb+srv://TheBlackWolf88:dani2004@rylia.z2kne.mongodb.net/ryliaDB?retryWrites=true&w=majority'
 
 module.exports = async() => {

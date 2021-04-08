@@ -1,5 +1,5 @@
 module.exports = async(client, Discord, reaction, user) => {
-    const questions = require('../../questions.json')
+    const questions = require('../../JSONS/questions.json')
     const mongo = require('../../mongo')
     const statSchema = require('../../schemas/statSchema')
     const ecoSchema = require('../../schemas/economySchema')
