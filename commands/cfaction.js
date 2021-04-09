@@ -5,6 +5,7 @@ module.exports = {
     description: "creates a faction",
     async execute(client, message, args, Discord) {
         if (message.member.permissions.has("ADMINISTRATOR")) {
+            if (args[0] === "royalassassin") args[0] = "Royal Assassin"
             await mongo().then(async(mongoose) => {
                 try {
                     await factionSchema.insertMany([{
