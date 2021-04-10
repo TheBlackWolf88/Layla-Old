@@ -14,12 +14,34 @@ function makeItLookGreat(string) {
     var newString = temp.join(" ")
     return newString
 }
+
+function inFaction(user, mention, message) {
+    const fArray = ['King', 'Royal Assassin', 'Mage', 'Blacksmith', 'Professor']
+    for (var item of fArray) {
+        var role = message.guild.roles.cache.find(r => r.name == item)
+
+        if (user.roles.cache.has(role.id)) {
+            //console.log(role)
+            //console.log("hai")
+            mention.roles.add(role)
+            return item
+        }
+
+    }
+    return false
+
+}
 module.exports = {
     name: "recruit",
     description: "Adds a member to a faction",
     async execute(client, message, args, Discord) {
-        args[1] = args[1].toLowerCase()
-        switch (args[1]) {
+        if (!message.member.roles.cache.has("780340586183786496")) return message.channel.send({ embed: { description: "Only the leader can recruit!" } })
+        let member = message.mentions.members.first()
+        let dname = member.displayName
+        var inF = inFaction(message.member, message.mentions.members.first(), message)
+        if (!inF) return
+            //console.log(inF)
+        switch (inF.toLowerCase()) {
             case "blacksmith":
                 colorHex = "#666666"
                 break
@@ -29,7 +51,7 @@ module.exports = {
             case "professor":
                 colorHex = "#AC8160"
                 break
-            case "royalassassin":
+            case "royal assassin":
                 colorHex = "#D82B00"
                 break
             case "king":
@@ -39,16 +61,10 @@ module.exports = {
 
 
         }
-        if (args[1] == "royalassassin") args[1] = "Royal Assassin"
-        let member = message.mentions.members.first()
-        let dname = member.displayName
-        args[1] = makeItLookGreat(args[1])
-        let role = message.guild.roles.cache.find(role => role.name == args[1])
-        if (!role) return message.channel.send("Nem létező frakció!")
-        member.roles.add(role)
+
         await mongo().then(async(mongoose) => {
             try {
-                await factionSchema.findOneAndUpdate({ _id: args[1] }, { $push: { members: dname } }).then(bool = true)
+                await factionSchema.findOneAndUpdate({ _id: inF }, { $push: { members: dname } }).then(bool = true)
             } finally {
                 mongoose.connection.close()
             }
@@ -57,7 +73,7 @@ module.exports = {
         return message.channel.send({
             embed: {
                 color: colorHex,
-                description: `Sikeresen felvetted ${dname}-et a frakciódba! (${args[1]})`
+                description: `Sikeresen felvetted ${dname}-et a frakciódba! (${inF})`
             }
         })
 

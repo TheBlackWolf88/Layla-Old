@@ -13,6 +13,8 @@ function inFaction(user, message) {
     return false
 
 }
+
+
 module.exports = {
     name: "treasury",
     description: "opens the treasury",
@@ -44,7 +46,6 @@ module.exports = {
             case "king":
                 colorHex = "#FFD700"
                 break
-
 
 
         }

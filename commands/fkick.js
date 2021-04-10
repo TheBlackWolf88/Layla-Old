@@ -25,6 +25,28 @@ module.exports = {
         var inF = inFaction(member, message)
             //console.log(inF)
         if (!inF) return message.channel.send({ embed: { description: "The one you're trying to kick is not in a faction" } })
+        var colorHex
+        switch (inF.toLowerCase()) {
+            case "blacksmith":
+                colorHex = "#666666"
+                break
+            case "mage":
+                colorHex = "#2791FF"
+                break
+            case "professor":
+                colorHex = "#AC8160"
+                break
+            case "royal assassin":
+                colorHex = "#D82B00"
+                break
+            case "king":
+                colorHex = "#FFD700"
+                break
+
+
+
+        }
+
         await mongo().then(async(mongoose) => {
             try {
                 await factionSchema.findOneAndUpdate({ _id: inF }, { $pull: { members: member.displayName } })
@@ -33,7 +55,7 @@ module.exports = {
             }
         })
 
-        return message.channel.send({ embed: { description: `You kicked ${member.displayName} from this faction: ${inF}` } })
+        return message.channel.send({ embed: { description: `You kicked ${member.displayName} from this faction: ${inF}`, color: colorHex } })
 
 
     }

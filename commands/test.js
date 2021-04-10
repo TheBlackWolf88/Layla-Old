@@ -5,9 +5,14 @@ const serverSchema = require('../schemas/serverSchema')
 module.exports = {
     name: 'test',
     async execute(client, message, args, Discord) {
-        var str = "1broadsword"
-        str = str.replace("1", "")
-        console.log(str)
+
+        function splitterino(str) {
+            str = str.match(/[A-Z][a-z]+/g)
+            str = str.join(" ")
+            return str
+        }
+
+        console.log(splitterino(args[0]))
 
 
     }

@@ -1,7 +1,7 @@
 const mongo = require('../mongo')
 const ecoSchema = require('../schemas/economySchema')
 var ecores = []
-const coinTypes = ['arany', 'ezüst', 'bronz'];
+const coinTypes = ['gold', 'silver', 'bronze'];
 const findEco = async(user) => {
     await mongo().then(async(mongoose) => {
         try {
@@ -14,6 +14,18 @@ const findEco = async(user) => {
         }
     })
 }
+
+function makeItLookGreat(string) {
+
+    var temp = string.split(" ")
+    var i = 0
+    for (var element of temp) {
+        temp[i] = element.charAt(0).toUpperCase() + element.slice(1)
+        i++
+    }
+    var newString = temp.join(" ")
+    return newString
+}
 module.exports = {
     name: 'transfer',
     description: 'Allows you to give money to another player',
@@ -24,68 +36,34 @@ module.exports = {
         var to = message.mentions.users.first().id
         var amount = Number(args[2])
         await findEco(message.author.id);
-        switch (args[1]) {
-            case 'arany':
-                if (amount <= ecores[0].toObject().gold) {
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: from }, { $inc: { gold: -amount } })
-                        } finally {
-                            mongoose.connection.close()
+        var type = args[1]
+        ecores = ecores[0].toObject()
+        if (amount <= ecores[type]) {
+            await mongo().then(async(mongoose) => {
+                try {
+                    await ecoSchema.findOneAndUpdate({ _id: from }, {
+                        $inc: {
+                            [type]: -amount
                         }
                     })
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: to }, { $inc: { gold: amount } })
-                        } finally {
-                            mongoose.connection.close()
-                        }
-                    })
-                } else {
-                    return message.channel.send(`Nincs elég ${args[1]}-d`)
+                } finally {
+                    mongoose.connection.close()
                 }
-                break;
-            case 'ezüst':
-                if (amount <= ecores[0].toObject().silver) {
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: from }, { $inc: { silver: -amount } })
-                        } finally {
-                            mongoose.connection.close()
+            })
+            await mongo().then(async(mongoose) => {
+                try {
+                    await ecoSchema.findOneAndUpdate({ _id: to }, {
+                        $inc: {
+                            [type]: amount
                         }
                     })
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: to }, { $inc: { silver: amount } })
-                        } finally {
-                            mongoose.connection.close()
-                        }
-                    })
-                } else {
-                    return message.channel.send(`Nincs elég ${args[1]}-d`)
+                } finally {
+                    mongoose.connection.close()
                 }
-                break;
-            case 'bronz':
-                if (amount <= ecores[0].toObject().bronze) {
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: from }, { $inc: { bronze: -amount } })
-                        } finally {
-                            mongoose.connection.close()
-                        }
-                    })
-                    await mongo().then(async(mongoose) => {
-                        try {
-                            await ecoSchema.findOneAndUpdate({ _id: to }, { $inc: { bronze: amount } })
-                        } finally {
-                            mongoose.connection.close()
-                        }
-                    })
-                } else {
-                    return message.channel.send(`Nincs elég ${args[1]}-d`)
-                }
-                break;
+            })
+        } else {
+            return message.channel.send({ embed: { description: `You don't have enough: ${makeItLookGreat(type)}` } })
         }
-        return message.channel.send(`${message.member.displayName} átadott ${amount} ${args[1]}-t ${message.mentions.members.first().displayName}-nak/nek.`)
+        return message.channel.send({ embed: { description: `${message.member.displayName} gave ${amount} ${makeItLookGreat(type)} to ${message.mentions.members.first().displayName}` } })
     }
 }
