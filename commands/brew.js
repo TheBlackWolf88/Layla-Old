@@ -173,39 +173,33 @@ module.exports = {
 
         let xp = getRandomIntInclusive(18, 27)
 
-        await mongo().then(async(mongoose) => {
-            try {
-                await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { exp: xp } })
-            } finally {
-                await mongo().then(async(mongoose) => {
-                    try {
-                        ecores = await ecoSchema.find({ _id: message.author.id })
-                            //console.log('nms')
-                        if (Number(ecores[0].toObject().exp) >= 100) {
-                            var exps = Number(ecores[0].toObject().exp)
-                            var sp = exps / 100
-                            sp = Math.floor(sp)
-                            var dxp = -sp * 100
-                                //console.log(sp, dxp)
-                            await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { skillPoints: sp } })
-                            await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { exp: dxp } })
 
-                        }
-                    } catch (error) {
-                        throw error;
-                    }
-                })
+        try {
+            await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { exp: xp } })
+        } finally {
 
-                mongoose.connection.close()
+
+            ecores = await ecoSchema.find({ _id: message.author.id })
+                //console.log('nms')
+            if (Number(ecores[0].toObject().exp) >= 100) {
+                var exps = Number(ecores[0].toObject().exp)
+                var sp = exps / 100
+                sp = Math.floor(sp)
+                var dxp = -sp * 100
+                    //console.log(sp, dxp)
+                await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { skillPoints: sp } })
+                await ecoSchema.findOneAndUpdate({ _id: message.author.id }, { $inc: { exp: dxp } })
+
             }
-        })
 
 
-        return message.channel.send({
-            embed: {
-                description: `Sikeresen lefőzted a bájitalt! (+${xp} xp)`,
-                color: "#687BBE"
-            }
-        })
+
+            return message.channel.send({
+                embed: {
+                    description: `Sikeresen lefőzted a bájitalt! (+${xp} xp)`,
+                    color: "#687BBE"
+                }
+            })
+        }
     }
 }
