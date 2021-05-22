@@ -1,6 +1,7 @@
+const config = require("@json/config.json")
 const cooldowns = new Map();
 module.exports = async(Discord, client, message) => {
-    const prefix = '-';
+    const prefix = config.prefix;
     if (!message.content.startsWith(prefix) || message.author.bot) return
 
 
