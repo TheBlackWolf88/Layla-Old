@@ -1,7 +1,9 @@
+require("module-alias/register")
 const Discord = require('discord.js');
 //const loadfeatures = require('./features/loadfeatures');
 const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION', 'CHANNEL'] });
-const suggestions = require("./suggestions")
+const suggestions = require("@root/suggestions")
+const config = require("@json/config.json")
 
 
 client.commands = new Discord.Collection()
@@ -9,16 +11,9 @@ client.events = new Discord.Collection
 
 const handlerArray = ['command_handler', 'event_handler']
 handlerArray.forEach(handler => {
-    require(`./handlers/${handler}`)(client, Discord)
+    require(`@handlers/${handler}`)(client, Discord)
 });
 //loadfeatures(client)
-suggestions(client)
+//suggestions(client)
 
-client.login('NTYxOTAzMzQxMjMyMzI0NjE5.XKC_RA.KfxKwrEDT0QJaeL_y1cS-38E9Mg')
-
-/*const kingrole = '780057018458570763'
-const adminrole = '780449029489295384'
-const smithrole = '780075087205498880'
-const magerole = '780074773387804682'
-const royalassasinrole = '780478867496108062'
- const profrole = '780059172506959923'*/
+client.login(config.Htoken)

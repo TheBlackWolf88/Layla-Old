@@ -1,5 +1,4 @@
-const mongo = require("../../mongo")
-    //const suggestions = require("../../suggestions")
+const mongo = require("@utils/mongo")
 module.exports = async(client, Discord) => {
     var msgID = '804987617337933874'
     if (msgID.partial) {

@@ -1,20 +1,30 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^12.5.1",
-    "fs": "0.0.1-security",
-    "module-alias": "^2.2.2",
-    "mongoose": "^5.11.15",
-    "path": "^0.12.7",
-    "redis": "^3.0.2"
-  }
+    "name": "test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^12.5.1",
+        "fs": "0.0.1-security",
+        "module-alias": "^2.2.2",
+        "mongoose": "^5.11.15",
+        "path": "^0.12.7",
+        "redis": "^3.0.2"
+    },
+    "_moduleAliases": {
+        "@root": ".",
+        "@commands": "./commands",
+        "@json": "./JSONS",
+        "@features": "./features",
+        "@handlers": "./handlers",
+        "@schemas": "./schemas",
+        "@events": "./events",
+        "@utils": "./utils"
+    }
 }
