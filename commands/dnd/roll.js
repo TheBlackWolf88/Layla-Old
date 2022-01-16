@@ -10,11 +10,11 @@ module.exports = {
 		}
 		let dice = Number(args[0])
 		let NoD = 1
-		if(NoD) NoD = Number(args[1])
-		for ( int i of NoD) {
-			message.send(`You rolled a D${dice}; you rolled a ${getRandomIntInclusive(1;dice)}`)
+		if(args[1]) NoD = Number(args[1])
+		for (let i = 0; i < NoD; i++) {
+			message.channel.send(`You rolled a D${dice}; you rolled a ${getRandomIntInclusive(1,dice)}`)
 		}
-		message.send(`End of Rolling`)
+		//		message.channel.send(`End of Rolling`)
 
 	}
 
