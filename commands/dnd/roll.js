@@ -11,7 +11,7 @@ module.exports = {
 		let dice = Number(args[0])
 		let NoD = 1
 		if(args[1]) NoD = Number(args[1])
-		if(Nod < 5){
+		if(NoD < 5){
 			for (let i = 0; i < NoD; i++) {
 				message.channel.send(`You rolled a D${dice}; you rolled a ${getRandomIntInclusive(1,dice)}`)
 			}
