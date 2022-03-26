@@ -11,10 +11,18 @@ module.exports = {
 		let dice = Number(args[0])
 		let NoD = 1
 		if(args[1]) NoD = Number(args[1])
-		for (let i = 0; i < NoD; i++) {
-			message.channel.send(`You rolled a D${dice}; you rolled a ${getRandomIntInclusive(1,dice)}`)
+		if(Nod < 5){
+			for (let i = 0; i < NoD; i++) {
+				message.channel.send(`You rolled a D${dice}; you rolled a ${getRandomIntInclusive(1,dice)}`)
+			}
+		} else {
+			for(let i = 0; i < NoD; i++){
+				let sum=0
+				sum+=getRandomIntInclusive(1;dice)
+			}
+			message.channel.send(`You rolled ${NoD} D${dice}s; the sum of your roll is ${sum}`)
 		}
-		//		message.channel.send(`End of Rolling`)
+	
 
 	}
 
