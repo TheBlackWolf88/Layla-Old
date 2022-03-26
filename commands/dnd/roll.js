@@ -18,7 +18,7 @@ module.exports = {
 		} else {
 			for(let i = 0; i < NoD; i++){
 				let sum=0
-				sum+=getRandomIntInclusive(1;dice)
+				sum+=getRandomIntInclusive(1,dice)
 			}
 			message.channel.send(`You rolled ${NoD} D${dice}s; the sum of your roll is ${sum}`)
 		}
