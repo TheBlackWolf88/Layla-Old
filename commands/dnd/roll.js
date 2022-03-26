@@ -10,6 +10,7 @@ module.exports = {
 		}
 		let dice = Number(args[0])
 		let NoD = 1
+		let sum=0
 		if(args[1]) NoD = Number(args[1])
 		if(NoD < 5){
 			for (let i = 0; i < NoD; i++) {
@@ -17,7 +18,6 @@ module.exports = {
 			}
 		} else {
 			for(let i = 0; i < NoD; i++){
-				let sum=0
 				sum+=getRandomIntInclusive(1,dice)
 			}
 			message.channel.send(`You rolled ${NoD} D${dice}s; the sum of your roll is ${sum}`)
