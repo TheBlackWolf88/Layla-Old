@@ -1,4 +1,4 @@
-const mongo = require("@utils/mongo")
+//const mongo = require("@utils/mongo")
 module.exports = async(client, Discord) => {
     var msgID = '804987617337933874'
     if (msgID.partial) {
@@ -13,6 +13,6 @@ module.exports = async(client, Discord) => {
     } else {
         console.log('The message is not partial.');
     }
-    await mongo()
+    //await mongo()
     console.log('Rylia is ready to be conquered!')
 }
