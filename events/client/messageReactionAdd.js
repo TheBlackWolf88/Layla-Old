@@ -1,6 +1,5 @@
 module.exports = async(client, Discord, reaction, user) => {
     const questions = require('../../JSONS/questions.json')
-    const mongo = require('../../mongo')
     const statSchema = require('../../schemas/statSchema')
     const ecoSchema = require('../../schemas/economySchema')
     var msgID = '804987617337933874'
@@ -40,57 +39,7 @@ module.exports = async(client, Discord, reaction, user) => {
                 var role = guild.roles.cache.find(role => role.name === '✅')
                 member.roles.add(role)
                 user.send(`Sikeres teszt! Elért eredmény: ${points}/10`);
-                await mongo().then(async mongoose => {
-                    try {
-                        await statSchema.findOneAndUpdate({
-                            _id: user.id
-                        }, {
-                            $inc: {
-                                'health': 100,
-                                'mana': 100,
-                                'stamina': 100,
-                                'dex': 0,
-                                'str': 0,
-                                'int': 0,
-                                'illusion': 0,
-                                'conjuration': 0,
-                                'destruction': 0,
-                                'restoration': 0,
-                                'alteration': 0,
-                                'enchanting': 0,
-                                'smithing': 0,
-                                'heavyarmor': 0,
-                                'block': 0,
-                                'twohanded': 0,
-                                'onehanded': 0,
-                                'archery': 0,
-                                'lightarmor': 0,
-                                'sneak': 0,
-                                'lockpicking': 0,
-                                'pickpocket': 0,
-                                'speech': 0,
-                                'alchemy': 0,
-                                'weight': 0
-                            }
-                        }, {
-                            upsert: true
-                        })
-                        await ecoSchema.findOneAndUpdate({ _id: user.id }, {
-                            $inc: {
-                                gold: 0,
-                                silver: 0,
-                                bronze: 0,
-                                exp: 0,
-                                skillPoints: 10
-                            },
-                        }, { upsert: true })
-                    } finally {
-                        mongoose.connection.close()
-                        console.log(`Sikeres tesztet írt: ${user.username}`)
-                    }
-
-                })
-            } else {
+           } else {
                 return user.send(`Sikertelen teszt! Elért eredmény: ${points}/9`);
             }
         } else {
